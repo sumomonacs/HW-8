@@ -1,5 +1,5 @@
 /**
- * The class represents the Fixture class.
+ * The class represents the Fixture Class.
  */
 public class Fixture {
   public String name;
@@ -11,7 +11,7 @@ public class Fixture {
   public String picture;
 
   /**
-   * Getter function - get the name of the fixture
+   * Getter function - get the name of the fixture.
    * @return the name of the fixture
    */
   public String getName() {
@@ -19,7 +19,7 @@ public class Fixture {
   }
 
   /**
-   * Setter func - set the name of the fixture
+   * Setter func - set the name of the fixture.
    * @param name of the fixture
    */
   public void setName(String name) {
@@ -27,7 +27,7 @@ public class Fixture {
   }
 
   /**
-   * Getter function - get the weight of the fixture
+   * Getter function - get the weight of the fixture.
    * Fixtures are immovable, so anything greater than 200 is acceptable.
    * @return the weight of the fixture
    */
@@ -36,7 +36,7 @@ public class Fixture {
   }
 
   /**
-   * Setter func - set the name of the fixture
+   * Setter func - set the name of the fixture.
    * Fixtures are immovable, so anything greater than 200 is acceptable.
    * @param weight of the fixture
    */
@@ -45,7 +45,7 @@ public class Fixture {
   }
 
   /**
-   * Getter function - get the puzzle of the fixture
+   * Getter function - get the puzzle of the fixture.
    * @return the puzzle of the fixture
    */
   public String getPuzzle() {
@@ -53,7 +53,7 @@ public class Fixture {
   }
 
   /**
-   * Setter func - set the puzzle of the fixture
+   * Setter func - set the puzzle of the fixture.
    * @param puzzle of the fixture
    */
   public void setPuzzle(String puzzle) {
@@ -61,7 +61,7 @@ public class Fixture {
   }
 
   /**
-   * Getter function - get the states of the fixture
+   * Getter function - get the states of the fixture.
    * @return the states of the fixture
    */
   public String getStates() {
@@ -69,7 +69,7 @@ public class Fixture {
   }
 
   /**
-   * Setter func - set the states of the fixture
+   * Setter func - set the states of the fixture.
    * @param states of the fixture
    */
   public void setStates(String states) {
@@ -77,7 +77,7 @@ public class Fixture {
   }
 
   /**
-   * Getter function - get the description of the fixture
+   * Getter function - get the description of the fixture.
    * @return the description of the fixture
    */
   public String getDescription() {
@@ -85,7 +85,7 @@ public class Fixture {
   }
 
   /**
-   * Setter func - set the description of the fixture
+   * Setter func - set the description of the fixture.
    * @param description of the fixture
    */
   public void setDescription(String description) {
@@ -93,7 +93,7 @@ public class Fixture {
   }
 
   /**
-   * Getter function - get the picture of the fixture
+   * Getter function - get the picture of the fixture.
    * @return the picture url of the fixture
    */
   public String getPicture() {
@@ -101,7 +101,7 @@ public class Fixture {
   }
 
   /**
-   * Setter func - set the picture of the fixture
+   * Setter func - set the picture of the fixture.
    * @param picture of the fixture
    */
   public void setPicture(String picture) {
