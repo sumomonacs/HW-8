@@ -1,13 +1,24 @@
+import java.util.List;
+
 /**
  * The class represents the Player Class.
  */
 public class Player {
-  public String name; // no exits in Player class in UML - need discussion
-  public Integer score;
-  public Integer health;
-  public Integer capacity;
-  public Room currentRoom;
+  private String name; // no exits in Player class in UML - need discussion
+  private Integer score;
+  private Integer health;
+  private List<Item> inventory;
+  private Integer capacity;
+  private Room currentRoom;
 
+
+  private void clampHealth() {
+
+  }
+
+  private void pickUpItem() {
+
+  }
 
   public String getName() {
     return name;
@@ -21,7 +32,7 @@ public class Player {
     return score;
   }
 
-  public void setScore(Integer score) {
+  private void setScore(Integer score) {
     this.score = score;
   }
 
@@ -32,10 +43,16 @@ public class Player {
   public Integer getCapacity() {
     return capacity;
   }
-  
+
   public Room getCurrentRoom() {
     return currentRoom;
   }
+
+  public void solve(Item item, Puzzle puzzle) {
+
+  }
+
+  public void solve(Item item) {}
 
 
 }
