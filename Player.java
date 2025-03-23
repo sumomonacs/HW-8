@@ -12,9 +12,40 @@ public class Player {
   private Room currentRoom;
 
 
-  private void pickUpItem() {
+  private void pickUpItem(Item pickedItem) {
+    int sum = 0;
 
+    // sum the weight of all items in the inventory
+    for (int i = 0; i < inventory.size(); i++) {
+      sum += inventory.get(i).getWeight();
+    }
+
+    // add the weight of the picked item
+    sum += pickedItem.getWeight();
+
+    // check if adding the new item exceeds the capacity
+    if (sum > capacity) {
+      System.out.println("Weight exceeds capacity");
+      return;
+      // exit the method if capacity is exceeded
+    } else {
+      inventory.add(pickedItem);
+      System.out.println("Item added successfully");
+    }
   }
+
+  private void dropItem(Item droppedItem) {
+    // Check if the inventory contains the dropped item
+    if (inventory.contains(droppedItem)) {
+      // Remove the item from the inventory
+      inventory.remove(droppedItem);
+      System.out.println("Item dropped successfully");
+    } else {
+      System.out.println("Item not found in inventory");
+    }
+  }
+
+
 
   public String getName() {
     return name;
@@ -44,12 +75,14 @@ public class Player {
     return currentRoom;
   }
 
+
+
   public void solve(Item item, Puzzle puzzle) {
-    if (puzzle == null || item == null) {
+    if (puzzle == null ||puzzle == null) {
       return;
     }
     puzzle.solve(item);
-    if (puzzle.getIsSolved()) {
+    if (!puzzle.isActive()) {
       this.score += puzzle.getValue();
     }
   }
@@ -59,7 +92,7 @@ public class Player {
       return;
     }
     puzzle.solve(magicWords);
-    if (puzzle.getIsSolved()) {
+    if (!puzzle.isActive()) {
       this.score += puzzle.getValue();
     }
   }
