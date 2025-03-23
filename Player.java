@@ -12,10 +12,6 @@ public class Player {
   private Room currentRoom;
 
 
-  private void clampHealth() {
-
-  }
-
   private void pickUpItem() {
 
   }
@@ -52,7 +48,15 @@ public class Player {
 
   }
 
-  public void solve(Item item) {}
+  public void solve(String magicWords, Puzzle puzzle) {
+    if (puzzle == null || magicWords == null || magicWords.equals("")) {
+      return;
+    }
+    puzzle.solve(magicWords);
+    if (puzzle.getIsSolved()) {
+      this.score += puzzle.getValue();
+    }
+  }
 
 
 }
