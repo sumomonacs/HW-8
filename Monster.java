@@ -1,20 +1,38 @@
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Monster {
-  public String name;
-  public boolean active;
-  public boolean affects_target;
-  public boolean affects_player;
-  public String solution;
-  public int value;
-  public String description;
-  public String effects;
-  public int damage;
-  public String target;
-  public boolean can_attack;
-  public String attack;
-  public String picture;
+public class Monster extends Challenge {
+  // Additional attributes unique to Monster
+  private int damage;
+  private boolean can_attack;
+  private String attack;
+
+  // Getter and setter for damage
+  public int getDamage() {
+    return damage;
+  }
+
+  public void setDamage(int damage) {
+    this.damage = damage;
+  }
+
+  // Getter and setter for can_attack
+  public boolean isCan_attack() {
+    return can_attack;
+  }
+
+  public void setCan_attack(boolean can_attack) {
+    this.can_attack = can_attack;
+  }
+
+  // Getter and setter for attack
+  public String getAttack() {
+    return attack;
+  }
+
+  public void setAttack(String attack) {
+    this.attack = attack;
+  }
 
   @Override
   public String toString() {
