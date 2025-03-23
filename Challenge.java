@@ -98,35 +98,35 @@ public class Challenge {
   }
 
 
-  public void solve(Item item){
+  public String solve(Item item){
     if(solution.startsWith("'")&&solution.endsWith("'")){
-      System.out.println("solution is a text, not an item");
-      return;
+      return ("solution is a text, not an item");
       // if solution is a text instead of a item ,then return
     }
     else if (solution.equalsIgnoreCase(item.getName())) {
-      System.out.println("Puzzle solved using the correct item!");
+
       //check if solution equal to item name,if solution is a item
       this.active = false;
+      return ("Puzzle solved using the correct item!");
     }
     else {
-      System.out.println("The item does not match the puzzle's solution.");
+      return ("The item does not match the puzzle's solution.");
     }
   }
 
-  public void solve(String magicWord){
+  public String solve(String magicWord){
     if(!(solution.startsWith("'")&&solution.endsWith("'"))){
-      System.out.println("solution is a item not a text");
-      return;
+      return ("solution is a item not a text");
+
       // if solution is a item instead of a string
     }
     else if (solution.equalsIgnoreCase(magicWord)) {
-      System.out.println("Puzzle solved using the correct magic word!");
       //check if solution equal to magic word
       this.active = false;
+      return ("Puzzle solved using the correct magic word!");
     }
     else {
-      System.out.println("The magicword does not match the puzzle's solution.");
+      return ("The magicword does not match the puzzle's solution.");
     }
   }
 }
