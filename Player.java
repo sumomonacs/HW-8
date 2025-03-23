@@ -37,8 +37,12 @@ public class Player {
   private void dropItem(Item droppedItem) {
     // Check if the inventory contains the dropped item
     if (inventory.contains(droppedItem)) {
+
+      // add item to Room
+      this.currentRoom.getItem().add(droppedItem);
       // Remove the item from the inventory
       inventory.remove(droppedItem);
+
       System.out.println("Item dropped successfully");
     } else {
       System.out.println("Item not found in inventory");
@@ -77,17 +81,26 @@ public class Player {
 
 
 
-  public void solve(Item item, Puzzle puzzle) {
+  public void solvePuzzle(Item item, Puzzle puzzle) {
     if (puzzle == null ||puzzle == null) {
       return;
     }
-    puzzle.solve(item);
-    if (!puzzle.isActive()) {
-      this.score += puzzle.getValue();
+    if(item.getUses_remaining()>1){
+      puzzle.solve(item);
+      if (!puzzle.isActive()) {
+        this.score += puzzle.getValue();
+        item.setUses_remaining(item.getUses_remaining()-1);
+        //set use_remaining -=1
+        if(item.getUses_remaining()< 1){
+          currentRoom.getItem().remove(item);
+          // if getUsesRemaining <1)
+          // remove item
+        }
+      }
     }
   }
 
-  public void solve(String magicWords, Puzzle puzzle) {
+  public void solvePuzzle(String magicWords, Puzzle puzzle) {
     if (puzzle == null || magicWords == null || magicWords.equals("")) {
       return;
     }
@@ -96,6 +109,36 @@ public class Player {
       this.score += puzzle.getValue();
     }
   }
+
+
+  public void solveMonster(Item item, Monster monster) {
+    if (monster == null || item == null) {
+      return;
+    }
+    if (item.getUses_remaining() > 1) {
+      monster.solve(item);
+      if (!monster.isActive()) {
+        this.score += monster.getValue();
+        item.setUses_remaining(item.getUses_remaining() - 1);
+        // set use_remaining -=1
+        if (item.getUses_remaining() < 1) {
+          currentRoom.getItem().remove(item);
+          // if getUsesRemaining < 1, remove item
+        }
+      }
+    }
+  }
+
+  public void solveMonster(String magicWords, Monster monster) {
+    if (monster == null || magicWords == null || magicWords.equals("")) {
+      return;
+    }
+    monster.solve(magicWords);
+    if (!monster.isActive()) {
+      this.score += monster.getValue();
+    }
+  }
+
 
 
 }
