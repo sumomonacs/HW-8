@@ -34,6 +34,42 @@ public class Monster extends Challenge {
     this.attack = attack;
   }
 
+
+  @Override
+  public String solve(Item item){
+    if(solution.startsWith("'")&&solution.endsWith("'")){
+      return ("solution is a text, not an item");
+      // if solution is a text instead of a item ,then return
+    }
+    else if (solution.equalsIgnoreCase(item.getName())) {
+
+      //check if solution equal to item name,if solution is a item
+      this.active = false;
+      return ("Monster solved using the correct item!");
+    }
+    else {
+      return ("The item does not match the Monster's solution.");
+    }
+  }
+
+
+  @Override
+  public String solve(String magicWord){
+    if(!(solution.startsWith("'")&&solution.endsWith("'"))){
+      return ("solution is a item not a text");
+
+      // if solution is a item instead of a string
+    }
+    else if (solution.equalsIgnoreCase(magicWord)) {
+      //check if solution equal to magic word
+      this.active = false;
+      return ("Monster solved using the correct magic word!");
+    }
+    else {
+      return ("The magicword does not match the Monster's solution.");
+    }
+  }
+
   @Override
   public String toString() {
     return "Monster{" +

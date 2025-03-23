@@ -1,6 +1,9 @@
-public class Challenge {
 
-  // Common attributes for Puzzle and Monster.
+
+
+
+public class Challenge {
+  // Common attributes for Puzzle and Monster
   protected String name;
   protected boolean active;
   protected boolean affects_target;
@@ -12,7 +15,7 @@ public class Challenge {
   protected String target;
   protected String picture;
 
-  // Getter methods.
+  // Getters
   public String getName() {
     return name;
   }
@@ -53,7 +56,7 @@ public class Challenge {
     return picture;
   }
 
-  // Setter methods.
+  // Setters
   public void setName(String name) {
     this.name = name;
   }
@@ -92,5 +95,19 @@ public class Challenge {
 
   public void setPicture(String picture) {
     this.picture = picture;
+  }
+
+  public String solve(Item item){
+    // if solution is a text instead of a item ,then return
+    // check if solution equal to item name,if solution is a item
+    // empty implementation, to be overridden in Puzzle and Monster
+    return "";
+  }
+
+  public String solve(String magicWord){
+    // if solution is an item instead of a string
+    // check if solution equal to magic word
+    // empty implementation, to be overridden in Puzzle and Monster
+    return "";
   }
 }
