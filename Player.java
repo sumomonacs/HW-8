@@ -80,13 +80,13 @@ public class Player {
   }
 
 
-
-  public void solvePuzzle(Item item, Puzzle puzzle) {
-    if (puzzle == null ||puzzle == null) {
-      return;
+  // vaild method
+  public String solvePuzzle(Item item, Puzzle puzzle) {
+    if (puzzle == null ||item == null) {
+      return("not a vaild puzzle or item");
     }
     if(item.getUses_remaining()>1){
-      puzzle.solve(item);
+      String result = puzzle.solve(item);
       if (!puzzle.isActive()) {
         this.score += puzzle.getValue();
         item.setUses_remaining(item.getUses_remaining()-1);
@@ -97,48 +97,107 @@ public class Player {
           // remove item
         }
       }
+      return result;
+    }else{
+      return("item are out of use,no chance to use it");
     }
   }
 
-  public void solvePuzzle(String magicWords, Puzzle puzzle) {
+  public String solvePuzzle(String magicWords, Puzzle puzzle) {
     if (puzzle == null || magicWords == null || magicWords.equals("")) {
-      return;
+      return("not a vaild puzzle or magic words");
     }
-    puzzle.solve(magicWords);
+    String result = puzzle.solve(magicWords);
     if (!puzzle.isActive()) {
       this.score += puzzle.getValue();
     }
+    return result;
   }
 
-
-  public void solveMonster(Item item, Monster monster) {
+  // vaild method
+  public String solveMonster(Item item, Monster monster) {
     if (monster == null || item == null) {
-      return;
+      return("not a vaild puzzle or item");
     }
-    if (item.getUses_remaining() > 1) {
-      monster.solve(item);
+    if(item.getUses_remaining() > 1){
+      String result = monster.solve(item);
       if (!monster.isActive()) {
         this.score += monster.getValue();
         item.setUses_remaining(item.getUses_remaining() - 1);
-        // set use_remaining -=1
-        if (item.getUses_remaining() < 1) {
+        //set use_remaining -=1
+        if(item.getUses_remaining() < 1){
           currentRoom.getItem().remove(item);
-          // if getUsesRemaining < 1, remove item
+          // if getUsesRemaining <1)
+          // remove item
         }
       }
+      return result;
+    } else {
+      return("item are out of use,no chance to use it");
     }
   }
 
-  public void solveMonster(String magicWords, Monster monster) {
+  public String solveMonster(String magicWords, Monster monster) {
     if (monster == null || magicWords == null || magicWords.equals("")) {
-      return;
+      return("not a vaild puzzle or magic words");
     }
-    monster.solve(magicWords);
+    String result = monster.solve(magicWords);
     if (!monster.isActive()) {
       this.score += monster.getValue();
     }
+    return result;
   }
 
 
+
+  // move method
+  public String move(String Direction, Map map) {
+    if (!(Direction.equals("N") || Direction.equals("E") || Direction.equals("S") || Direction.equals("W"))) {
+      return ("Input must be N, E, S, or W");
+    }
+
+    int nextRoomNumber = -1;
+    String blockedMessage = "";
+
+    // using switch case to try to catach direction
+    switch (Direction) {
+      case "N":
+        nextRoomNumber = this.currentRoom.getN();
+        blockedMessage = "North is being permantly blocked ";
+        break;
+      case "E":
+        nextRoomNumber = this.currentRoom.getE();
+        blockedMessage = "East is being permantly blocked ";
+        break;
+      case "S":
+        nextRoomNumber = this.currentRoom.getS();
+        blockedMessage = "South is being permantly blocked ";
+        break;
+      case "W":
+        nextRoomNumber = this.currentRoom.getW();
+        blockedMessage = "West is being permantly blocked ";
+        break;
+    }
+
+    // check
+    if (nextRoomNumber > 0) {
+      // if nextRoom number is greater than >. it is a vaild way
+      for (int i = 0; i < map.getRooms().size(); i++) {
+        Room room = map.getRooms().get(i);
+        if (nextRoomNumber == room.getRoom_number()) {
+          this.currentRoom = room;
+          return ("move successfully");
+          // if map do have this room , then player move to this Room
+        }
+      }
+    } else if (nextRoomNumber == 0) {
+      // if nextRoomNumber ==0, it is permantly blocked
+      return (blockedMessage);
+    } else {
+      // if it is negative, then there is puzzle or monster currently blocking the access
+      return ("there is a puzzle or monster currently blocking access to the room in that direction");
+    }
+    return ("there is a puzzle or monster currently blocking access to the room in that direction");
+  }
 
 }
