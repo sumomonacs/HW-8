@@ -2,7 +2,7 @@
 
 
 
-public class Challenge {
+public abstract class Challenge {
   // Common attributes for Puzzle and Monster
   protected String name;
   protected boolean active;
