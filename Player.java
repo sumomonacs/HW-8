@@ -45,7 +45,13 @@ public class Player {
   }
 
   public void solve(Item item, Puzzle puzzle) {
-
+    if (puzzle == null || item == null) {
+      return;
+    }
+    puzzle.solve(item);
+    if (puzzle.getIsSolved()) {
+      this.score += puzzle.getValue();
+    }
   }
 
   public void solve(String magicWords, Puzzle puzzle) {
