@@ -12,6 +12,7 @@ public class Puzzle extends Challenge {
    * If the puzzle is solved using an item instead of a text
    * input:
    */
+  @Override
   public String solve(Item item) {
     if (solution.startsWith("'") && solution.endsWith("'")) {
       return ("solution is a text, not an item");
@@ -28,8 +29,9 @@ public class Puzzle extends Challenge {
 
   /**
    * If the puzzle is solved using a single magic word (text input)
-   * instead of an item :
+   * instead of an item s:
    */
+  @Override
   public String solve(String magicWord) {
     if (!(solution.startsWith("'") && solution.endsWith("'"))) {
       return ("solution is a item not a text");
