@@ -5,6 +5,8 @@ public class GameController {
   private Player player;
 
 
+  // view put inside controller
+
   //move method -- Yijie Li
 
   // look method and examine --Alexender
@@ -18,4 +20,7 @@ public class GameController {
 
   // Dostring- Abdullahi Abdirahman:
 
+  // don't print anything inside player, fixure,room,etc class
+  // return a string inside player, etc instead
+  // print everything inside view Class
 }
