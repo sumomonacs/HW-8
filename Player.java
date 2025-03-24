@@ -266,13 +266,5 @@ public class Player {
     }
     return ("there is a puzzle or monster currently blocking access to the room in that direction");
   }
-<<<<<<< HEAD
-=======
 
-
-
-
-
-
->>>>>>> 9d23d7cd92e8e23838346e0391c7e5871d81316e
 }
