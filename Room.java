@@ -94,6 +94,16 @@ public class Room {
         return description;
     }
 
+
+    // a helper function that set Room's direction to passable
+    public void setRoomToPassable() {
+        this.N = Math.abs(this.N);
+        this.W = Math.abs(this.W);
+        this.E = Math.abs(this.E);
+        this.S = Math.abs(this.S);
+    }
+
+
     public int getN() {
         return N;
     }

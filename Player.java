@@ -85,12 +85,14 @@ public class Player {
     if (puzzle == null ||item == null) {
       return("not a vaild puzzle or item");
     }
-    if(item.getUses_remaining() >= 1){
+    if(item.getUses_remaining()>=1){
       String result = puzzle.solve(item);
       if (!puzzle.isActive()) {
         this.score += puzzle.getValue();
         item.setUses_remaining(item.getUses_remaining()-1);
         //set use_remaining -=1
+        this.currentRoom.setRoomToPassable();// set room to passable for all direction
+        // once the puzzle or monster being solved
         if(item.getUses_remaining()< 1){
           currentRoom.getItem().remove(item);
           // if getUsesRemaining <1)
@@ -110,6 +112,8 @@ public class Player {
     String result = puzzle.solve(magicWords);
     if (!puzzle.isActive()) {
       this.score += puzzle.getValue();
+      this.currentRoom.setRoomToPassable();// set room to passable for all direction
+      // once the puzzle or monster being solved
     }
     return result;
   }
@@ -125,6 +129,9 @@ public class Player {
         this.score += monster.getValue();
         item.setUses_remaining(item.getUses_remaining() - 1);
         //set use_remaining -=1
+        this.currentRoom.setRoomToPassable();// set room to passable for all direction
+        // once the puzzle or monster being solved
+
         if(item.getUses_remaining() < 1){
           currentRoom.getItem().remove(item);
           // if getUsesRemaining <1)
@@ -144,6 +151,8 @@ public class Player {
     String result = monster.solve(magicWords);
     if (!monster.isActive()) {
       this.score += monster.getValue();
+      this.currentRoom.setRoomToPassable();// set room to passable for all direction
+      // once the puzzle or monster being solved 
     }
     return result;
   }
@@ -199,5 +208,10 @@ public class Player {
     }
     return ("there is a puzzle or monster currently blocking access to the room in that direction");
   }
+
+
+
+
+
 
 }
