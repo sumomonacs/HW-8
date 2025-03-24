@@ -85,7 +85,7 @@ public class Player {
     if (puzzle == null ||item == null) {
       return("not a vaild puzzle or item");
     }
-    if(item.getUses_remaining()>1){
+    if(item.getUses_remaining() >= 1){
       String result = puzzle.solve(item);
       if (!puzzle.isActive()) {
         this.score += puzzle.getValue();
@@ -119,7 +119,7 @@ public class Player {
     if (monster == null || item == null) {
       return("not a vaild puzzle or item");
     }
-    if(item.getUses_remaining() > 1){
+    if(item.getUses_remaining() >= 1){
       String result = monster.solve(item);
       if (!monster.isActive()) {
         this.score += monster.getValue();
