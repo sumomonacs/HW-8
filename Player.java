@@ -97,6 +97,16 @@ public class Player {
   }
 
   /**
+   * Set the health of the player.
+   * @param health health should range from 0 to 100
+   */
+  public void setHealth(Integer health) {
+    if (health >= 0 && health <= 100) {
+      this.health = health;
+    }
+  }
+
+  /**
    * Getter function - get the capacity
    * @return the items that the player can pick
    */
