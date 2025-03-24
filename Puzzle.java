@@ -1,6 +1,4 @@
 
-
-
 /**
  * The Puzzle class extends Challenge, whereby all common attributes
  * and methods are inherited. It represents the game's puzzle logic.
@@ -33,7 +31,7 @@ public class Puzzle extends Challenge {
    */
   @Override
   public String solve(String magicWord) {
-    if (!(solution.startsWith("'") && solution.endsWith("'"))) {
+    if (!(solution.startsWith("'") || solution.endsWith("'"))) {
       return ("solution is a item not a text");
 
       // if solution is a item instead of a string
