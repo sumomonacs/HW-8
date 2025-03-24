@@ -8,13 +8,13 @@ public class Room {
     private int S;//south
     private int E; //east
     private int W; //west
-    private List<Puzzle> puzzles;
-    private List<Monster> monsters;
+    private Puzzle puzzle;
+    private Monster monster;
     private List<Item> item;
     private List<Fixture> fixures;
     private String picture;
 
-    public Room(String room_name, int room_number, String description, int n, int s, int e, int w, List<Puzzle> puzzles, List<Monster> monsters, List<Item> item, List<Fixture> fixures, String picture) {
+    public Room(String room_name, int room_number, String description, int n, int s, int e, int w, Puzzle puzzles, Monster monster, List<Item> item, List<Fixture> fixures, String picture) {
         this.room_name = room_name;
         this.room_number = room_number;
         this.description = description;
@@ -22,8 +22,8 @@ public class Room {
         S = s;
         E = e;
         W = w;
-        this.puzzles = puzzles;
-        this.monsters = monsters;
+        this.puzzle = puzzles;
+        this.monster = monster;
         this.item = item;
         this.fixures = fixures;
         this.picture = picture;
@@ -57,8 +57,7 @@ public class Room {
      * @return effect from an active puzzle or monster or the original room description.
      */
     public String getDescription() {
-        for (int i = 0; i < puzzles.size(); i++) {
-            Puzzle puzzle = puzzles.get(i);
+            Puzzle puzzle =this.puzzle;
             // Check that the puzzle is active, affects the target, and has a valid target string.
             if (puzzle.isActive() && puzzle.isAffects_target() && puzzle.getTarget() != null) {
                 String[] targetParts = puzzle.getTarget().split(":");
@@ -73,9 +72,8 @@ public class Room {
                     }
                 }
             }
-        }
-        for (int i = 0; i < monsters.size(); i++) {
-            Monster monster = monsters.get(i);
+
+            Monster monster = this.monster;
             // Check that the monster is active, affects the target, and has a valid target string.
             if (monster.isActive() && monster.isAffects_target() && monster.getTarget() != null) {
                 String[] targetParts = monster.getTarget().split(":");
@@ -90,7 +88,7 @@ public class Room {
                     }
                 }
             }
-        }
+
         return description;
     }
 
@@ -120,12 +118,12 @@ public class Room {
         return W;
     }
 
-    public List<Puzzle> getPuzzles() {
-        return puzzles;
+    public Puzzle getPuzzles() {
+        return puzzle;
     }
 
-    public List<Monster> getMonsters() {
-        return monsters;
+    public Monster getMonsters() {
+        return monster;
     }
 
     public List<Item> getItem() {
@@ -172,12 +170,12 @@ public class Room {
         W = w;
     }
 
-    public void setPuzzles(List<Puzzle> puzzles) {
-        this.puzzles = puzzles;
+    public void setPuzzles(Puzzle puzzles) {
+        this.puzzle = puzzles;
     }
 
-    public void setMonsters(List<Monster> monsters) {
-        this.monsters = monsters;
+    public void setMonsters(Monster monsters) {
+        this.monster = monsters;
     }
 
     public void setItem(List<Item> item) {
