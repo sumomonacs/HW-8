@@ -11,7 +11,10 @@ public class Player {
   private Integer capacity;
   private Room currentRoom;
 
-
+  /**
+   * Pick up the item.
+   * @param pickedItem item
+   */
   private void pickUpItem(Item pickedItem) {
     int sum = 0;
 
@@ -34,6 +37,10 @@ public class Player {
     }
   }
 
+  /**
+   * Drop item to the room.
+   * @param droppedItem drop item
+   */
   private void dropItem(Item droppedItem) {
     // Check if the inventory contains the dropped item
     if (inventory.contains(droppedItem)) {
@@ -49,38 +56,69 @@ public class Player {
     }
   }
 
-
-
+  /**
+   * Getter function - get the name of the player.
+   * @return name of the player
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Setter function - set the name of the player.
+   * @param name name of the player
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Getter function - get the score of the player.
+   * @return the score of the function
+   */
   public Integer getScore() {
     return score;
   }
 
+  /**
+   * Setter function - set the score of the player
+   * @param score score of the player
+   */
   private void setScore(Integer score) {
     this.score = score;
   }
 
+  /**
+   * Getter function - get the health status of the player
+   * @return the health of the player
+   */
   public Integer getHealth() {
     return health;
   }
 
+  /**
+   * Getter function - get the capacity
+   * @return the items that the player can pick
+   */
   public Integer getCapacity() {
     return capacity;
   }
 
+  /**
+   * Getter function - get the room player located
+   * @return the room player currently at
+   */
   public Room getCurrentRoom() {
     return currentRoom;
   }
 
 
-  // vaild method
+  /**
+   * Solve the puzzle with item
+   * @param item item tha player uses
+   * @param puzzle puzzle that player facing
+   * @return message shows that whether the answer for puzzle is correct
+   */
   public String solvePuzzle(Item item, Puzzle puzzle) {
     if (puzzle == null ||item == null) {
       return("not a vaild puzzle or item");
@@ -103,6 +141,12 @@ public class Player {
     }
   }
 
+  /**
+   * Solve the puzzle with item
+   * @param magicWords magic words that player input
+   * @param puzzle puzzle that player facing
+   * @return message shows that whether the answer for puzzle is correct
+   */
   public String solvePuzzle(String magicWords, Puzzle puzzle) {
     if (puzzle == null || magicWords == null || magicWords.equals("")) {
       return("not a vaild puzzle or magic words");
@@ -114,7 +158,12 @@ public class Player {
     return result;
   }
 
-  // vaild method
+  /**
+   * Fight with the monster using item.
+   * @param item used to fight the monster
+   * @param monster monster player facing right now
+   * @return message shows that whether it works for the monster
+   */
   public String solveMonster(Item item, Monster monster) {
     if (monster == null || item == null) {
       return("not a vaild puzzle or item");
@@ -137,6 +186,12 @@ public class Player {
     }
   }
 
+  /**
+   * Fight with the monster using magic words.
+   * @param magicWords used to fight the monster
+   * @param monster monster player facing right now
+   * @return message shows that whether it works for the monster
+   */
   public String solveMonster(String magicWords, Monster monster) {
     if (monster == null || magicWords == null || magicWords.equals("")) {
       return("not a vaild puzzle or magic words");
@@ -148,9 +203,12 @@ public class Player {
     return result;
   }
 
-
-
-  // move method
+  /**
+   * Move method.
+   * @param Direction direction player wants to move
+   * @param map map
+   * @return message shows that whether the move is accepted
+   */
   public String move(String Direction, Map map) {
     if (!(Direction.equals("N") || Direction.equals("E") || Direction.equals("S") || Direction.equals("W"))) {
       return ("Input must be N, E, S, or W");
@@ -199,5 +257,4 @@ public class Player {
     }
     return ("there is a puzzle or monster currently blocking access to the room in that direction");
   }
-
 }
