@@ -34,6 +34,15 @@ public class Monster extends Challenge {
     this.attack = attack;
   }
 
+  /**
+   * Attack the player damaging the health of the player
+   * @param player current player
+   */
+  public void attackPlayer(Player player) {
+      int playerHealth = player.getHealth();
+      // Attack the player and affects the health of the player
+      player.setHealth(playerHealth - this.damage);
+  }
 
   @Override
   public String solve(Item item){
@@ -69,6 +78,7 @@ public class Monster extends Challenge {
       return ("The magicword does not match the Monster's solution.");
     }
   }
+
 
   @Override
   public String toString() {
