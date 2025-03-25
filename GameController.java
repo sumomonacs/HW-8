@@ -116,47 +116,56 @@ public class GameController {
 
   // view put inside controller
 
-    //move method -- Yijie Li
+  //move method -- Yijie Li
 
-    // look method and examine --Alexender
+  // look method and examine --Alexender
 
-    //take and drop item --Amy
-    public String takeItem(String itemName) {
-      Room currentRoom = player.getCurrentRoom();
-      List<Item> roomItems = currentRoom.getItem();
+  //take and drop item --Amy
+  public String takeItem(String itemName) {
+    Room currentRoom = player.getCurrentRoom();
+    List<Item> roomItems = currentRoom.getItem();
 
-      for (Iterator<Item> it = roomItems.iterator(); it.hasNext();) {
-        Item item = it.next();
-        if (item.getName().equalsIgnoreCase(itemName)) {
-          it.remove();
-          player.pickUpItem(item);
+    for (Iterator<Item> it = roomItems.iterator(); it.hasNext();) {
+      Item item = it.next();
+      if (item.getName().equalsIgnoreCase(itemName)) {
+        it.remove();
+        int result = player.pickUpItem(item);
+        if (result == 0) {
           return itemName + " added to your inventory.";
+        } else {
+          return "Weight exceeds capacity, cannot pick up " + itemName + ".";
         }
       }
-      return "Item '" + itemName + "' not found in this room.";
     }
+    return "Item '" + itemName + "' not found in this room.";
+  }
 
   public String dropItem(String itemName) {
     List<Item> inventory = player.getInventory();
     for (Iterator<Item> it = inventory.iterator(); it.hasNext();) {
       Item item = it.next();
       if (item.getName().equalsIgnoreCase(itemName)) {
-        player.dropItem(item);
-        return itemName + " dropped here in " + player.getCurrentRoom();
+        boolean result = player.dropItem(item);
+        if (result) {
+          return itemName + " dropped here in " + player.getCurrentRoom();
+        } else {
+          return "Error dropping " + itemName + ".";
+        }
       }
     }
     return "You don't have item '" + itemName + "' in your inventory.";
   }
+}
 
-    // use item and anwser question to solve monster and puzzle-- David Liu,
+  // use item and anwser question to solve monster and puzzle-- David Liu,
 
-    // save and load game -- Chen
+  // save and load game -- Chen
 
 
-    // Dostring- Abdullahi Abdirahman:
+  // Dostring- Abdullahi Abdirahman:
 
-    // don't print anything inside player, fixure,room,etc class
-    // return a string inside player, etc instead
-    // print everything inside view Class
+  // don't print anything inside player, fixure,room,etc class
+  // return a string inside player, etc instead
+  // print everything inside view Class
 
 }

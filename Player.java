@@ -14,8 +14,9 @@ public class Player {
   /**
    * Pick up the item.
    * @param pickedItem item
+   * @return return a int -1 means capacity exceed limit,0 succeed
    */
-  public void pickUpItem(Item pickedItem) {
+  public int pickUpItem(Item pickedItem) {
     int sum = 0;
 
     // sum the weight of all items in the inventory
@@ -28,20 +29,20 @@ public class Player {
 
     // check if adding the new item exceeds the capacity
     if (sum > capacity) {
-      System.out.println("Weight exceeds capacity");
-      return;
       // exit the method if capacity is exceeded
+      return -1;
     } else {
       inventory.add(pickedItem);
-      System.out.println("Item added successfully");
+      return 0;
     }
   }
 
   /**
    * Drop item to the room.
    * @param droppedItem drop item
+   *@return return true means success ,false othersie
    */
-  public void dropItem(Item droppedItem) {
+  public boolean dropItem(Item droppedItem) {
     // Check if the inventory contains the dropped item
     if (inventory.contains(droppedItem)) {
 
@@ -50,9 +51,9 @@ public class Player {
       // Remove the item from the inventory
       inventory.remove(droppedItem);
 
-      System.out.println("Item dropped successfully");
+      return true;
     } else {
-      System.out.println("Item not found in inventory");
+      return false;
     }
   }
 
@@ -222,7 +223,7 @@ public class Player {
     if (!monster.isActive()) {
       this.score += monster.getValue();
       this.currentRoom.setRoomToPassable();// set room to passable for all direction
-      // once the puzzle or monster being solved 
+      // once the puzzle or monster being solved
     }
     return result;
   }
