@@ -57,41 +57,40 @@ public class Room {
      * @return effect from an active puzzle or monster or the original room description.
      */
     public String getDescription() {
-            Puzzle puzzle =this.puzzle;
-            // Check that the puzzle is active, affects the target, and has a valid target string.
-            if (puzzle.isActive() && puzzle.isAffects_target() && puzzle.getTarget() != null) {
-                String[] targetParts = puzzle.getTarget().split(":");
-                if (targetParts.length == 2) {
-                    // Remove any extra whitespace
-                    String targetRoomNumber = targetParts[0].trim();
-                    String targetRoomName = targetParts[1].trim();
-                    if (targetRoomNumber.equals(this.room_number) && targetRoomName.equalsIgnoreCase(this.room_name)) {
-                        return puzzle.getEffects();
-                        // if the puzzle  is active and affect this room ,then return a puzzle's effect
-                        // instead of returning the original description
-                    }
+        Puzzle puzzle = this.puzzle;
+        // Check that the puzzle is active, affects the target, and has a valid target string.
+        if (puzzle != null && puzzle.isActive() && puzzle.isAffects_target() && puzzle.getTarget() != null) {
+            String[] targetParts = puzzle.getTarget().split(":");
+            if (targetParts.length == 2) {
+                // Remove any extra whitespace
+                String targetRoomNumber = targetParts[0].trim();
+                String targetRoomName = targetParts[1].trim();
+                if (targetRoomNumber.equals(this.room_number) && targetRoomName.equalsIgnoreCase(this.room_name)) {
+                    return puzzle.getEffects();
+                    // if the puzzle  is active and affect this room ,then return a puzzle's effect
+                    // instead of returning the original description
                 }
             }
+        }
 
-            Monster monster = this.monster;
-            // Check that the monster is active, affects the target, and has a valid target string.
-            if (monster.isActive() && monster.isAffects_target() && monster.getTarget() != null) {
-                String[] targetParts = monster.getTarget().split(":");
-                if (targetParts.length == 2) {
-                    // Remove any extra whitespace
-                    String targetRoomNumber = targetParts[0].trim();
-                    String targetRoomName = targetParts[1].trim();
-                    if (targetRoomNumber.equals(this.room_number) && targetRoomName.equalsIgnoreCase(this.room_name)) {
-                        return monster.getEffects();
-                        // if the monster  is active and affect this room, then return a monster's effect
-                        // instead of returning the original description
-                    }
+        Monster monster = this.monster;
+        // Check that the monster is active, affects the target, and has a valid target string.
+        if (monster != null && monster.isActive() && monster.isAffects_target() && monster.getTarget() != null) {
+            String[] targetParts = monster.getTarget().split(":");
+            if (targetParts.length == 2) {
+                // Remove any extra whitespace
+                String targetRoomNumber = targetParts[0].trim();
+                String targetRoomName = targetParts[1].trim();
+                if (targetRoomNumber.equals(this.room_number) && targetRoomName.equalsIgnoreCase(this.room_name)) {
+                    return monster.getEffects();
+                    // if the monster  is active and affect this room, then return a monster's effect
+                    // instead of returning the original description
                 }
             }
+        }
 
         return description;
     }
-
 
     // a helper function that set Room's direction to passable
     public void setRoomToPassable() {
