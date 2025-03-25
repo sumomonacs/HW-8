@@ -15,7 +15,7 @@ public class Player {
    * Pick up the item.
    * @param pickedItem item
    */
-  private void pickUpItem(Item pickedItem) {
+  public void pickUpItem(Item pickedItem) {
     int sum = 0;
 
     // sum the weight of all items in the inventory
@@ -41,7 +41,7 @@ public class Player {
    * Drop item to the room.
    * @param droppedItem drop item
    */
-  private void dropItem(Item droppedItem) {
+  public void dropItem(Item droppedItem) {
     // Check if the inventory contains the dropped item
     if (inventory.contains(droppedItem)) {
 
@@ -122,6 +122,11 @@ public class Player {
     return currentRoom;
   }
 
+  /**
+   * Getter function - get the inventory of the player.
+   * @return the inventory of the player
+   */
+  public List<Item> getInventory() { return inventory;}
 
   /**
    * Solve the puzzle with item
