@@ -121,6 +121,32 @@ public class GameController {
     // look method and examine --Alexender
 
     //take and drop item --Amy
+    public String takeItem(String itemName) {
+      Room currentRoom = player.getCurrentRoom();
+      List<Item> roomItems = currentRoom.getItem();
+
+      for (Iterator<Item> it = roomItems.iterator(); it.hasNext();) {
+        Item item = it.next();
+        if (item.getName().equalsIgnoreCase(itemName)) {
+          it.remove();
+          player.pickUpItem(item);
+          return itemName + " added to your inventory.";
+        }
+      }
+      return "Item '" + itemName + "' not found in this room.";
+    }
+
+  public String dropItem(String itemName) {
+    List<Item> inventory = player.getInventory();
+    for (Iterator<Item> it = inventory.iterator(); it.hasNext();) {
+      Item item = it.next();
+      if (item.getName().equalsIgnoreCase(itemName)) {
+        player.dropItem(item); // 自动移除 + 加入房间
+        return itemName + " dropped here in " + player.getCurrentRoom();
+      }
+    }
+    return "You don't have item '" + itemName + "' in your inventory.";
+  }
 
     // use item and anwser question to solve monster and puzzle-- David Liu,
 
