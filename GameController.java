@@ -141,7 +141,7 @@ public class GameController {
     for (Iterator<Item> it = inventory.iterator(); it.hasNext();) {
       Item item = it.next();
       if (item.getName().equalsIgnoreCase(itemName)) {
-        player.dropItem(item); // 自动移除 + 加入房间
+        player.dropItem(item);
         return itemName + " dropped here in " + player.getCurrentRoom();
       }
     }
