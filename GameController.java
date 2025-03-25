@@ -155,8 +155,6 @@ public class GameController {
     }
     return "You don't have item '" + itemName + "' in your inventory.";
   }
-}
-
   // use item and anwser question to solve monster and puzzle-- David Liu,
 
   // save and load game -- Chen
@@ -167,5 +165,6 @@ public class GameController {
   // don't print anything inside player, fixure,room,etc class
   // return a string inside player, etc instead
   // print everything inside view Class
-
+  
 }
+
