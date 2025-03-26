@@ -11,17 +11,20 @@ public class Puzzle extends Challenge {
    * input:
    */
   @Override
-  public String solve(Item item) {
+  public Integer solve(Item item) {
     if (solution.startsWith("'") && solution.endsWith("'")) {
-      return ("solution is a text, not an item");
+      // "solution is a text, not an item"
+      return SOLVE_WRONG_TYPE;
       // if solution is a text instead of a item ,then return
     } else if (solution.equalsIgnoreCase(item.getName())) {
 
       //check if solution equal to item name,if solution is a item
       this.active = false;
-      return ("Puzzle solved using the correct item!");
+      //"Puzzle solved using the correct item!"
+      return SOLVE_SUCCESS;
     } else {
-      return ("The item does not match the puzzle's solution.");
+      // "The item does not match the puzzle's solution."
+      return SOLVE_FAIL;
     }
   }
 
@@ -30,17 +33,19 @@ public class Puzzle extends Challenge {
    * instead of an item s:
    */
   @Override
-  public String solve(String magicWord) {
+  public Integer solve(String magicWord) {
     if (!(solution.startsWith("'") || solution.endsWith("'"))) {
-      return ("solution is a item not a text");
-
+      // "solution is a item not a text"
+      return SOLVE_WRONG_TYPE;
       // if solution is a item instead of a string
     } else if (solution.equalsIgnoreCase(magicWord)) {
-      //check if solution equal to magic word
+      // check if solution equal to magic word
       this.active = false;
-      return ("Puzzle solved using the correct magic word!");
+      // "Puzzle solved using the correct magic word!"
+      return SOLVE_SUCCESS;
     } else {
-      return ("The magicword does not match the puzzle's solution.");
+      // "The magicword does not match the puzzle's solution."
+      return SOLVE_FAIL;
     }
   }
 }

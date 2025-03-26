@@ -16,7 +16,7 @@ public class Player {
    * @param pickedItem item
    * @return return a int -1 means capacity exceed limit,0 succeed
    */
-  public int pickUpItem(Item pickedItem) {
+  public boolean pickUpItem(Item pickedItem) {
     int sum = 0;
 
     // sum the weight of all items in the inventory
@@ -30,10 +30,10 @@ public class Player {
     // check if adding the new item exceeds the capacity
     if (sum > capacity) {
       // exit the method if capacity is exceeded
-      return -1;
+      return false;
     } else {
       inventory.add(pickedItem);
-      return 0;
+      return true;
     }
   }
 
@@ -100,10 +100,15 @@ public class Player {
   /**
    * Set the health of the player.
    * @param health health should range from 0 to 100
+   * @return boolean - status of the setting
    */
-  public void setHealth(Integer health) {
+  public boolean setHealth(Integer health) {
     if (health >= 0 && health <= 100) {
       this.health = health;
+      return true;
+    } else {
+      // If health of the player is out of range it's false
+      return false;
     }
   }
 
@@ -133,48 +138,54 @@ public class Player {
    * Solve the puzzle with item
    * @param item item tha player uses
    * @param puzzle puzzle that player facing
-   * @return message shows that whether the answer for puzzle is correct
+   * @return common status code
    */
-  public String solvePuzzle(Item item, Puzzle puzzle) {
-    if (puzzle == null ||item == null) {
-      return("not a vaild puzzle or item");
+  public Integer solvePuzzle(Item item, Puzzle puzzle) {
+    if (puzzle == null || item == null) {
+      return Challenge.SOLVE_ERROR;
     }
-    if(item.getUses_remaining()>=1){
-      String result = puzzle.solve(item);
-      if (!puzzle.isActive()) {
-        this.score += puzzle.getValue();
-        item.setUses_remaining(item.getUses_remaining()-1);
-        //set use_remaining -=1
-        this.currentRoom.setRoomToPassable();// set room to passable for all direction
-        // once the puzzle or monster being solved
-        if(item.getUses_remaining()< 1){
-          currentRoom.getItem().remove(item);
-          // if getUsesRemaining <1)
-          // remove item
-        }
+
+    if (item.getUses_remaining() < 1) {
+      return Challenge.SOLVE_FAIL;
+    }
+
+    Integer result = puzzle.solve(item);
+
+    if (result == Challenge.SOLVE_SUCCESS && !puzzle.isActive()) {
+      this.score += puzzle.getValue();
+      item.setUses_remaining(item.getUses_remaining() - 1);
+
+      this.currentRoom.setRoomToPassable();
+
+      if (item.getUses_remaining() < 1) {
+        currentRoom.getItem().remove(item);
       }
-      return result;
-    }else{
-      return("item are out of use,no chance to use it");
     }
+
+    return result;
   }
 
   /**
    * Solve the puzzle with item
    * @param magicWords magic words that player input
    * @param puzzle puzzle that player facing
-   * @return message shows that whether the answer for puzzle is correct
+   * @return common status code
    */
-  public String solvePuzzle(String magicWords, Puzzle puzzle) {
+  public Integer solvePuzzle(String magicWords, Puzzle puzzle) {
     if (puzzle == null || magicWords == null || magicWords.equals("")) {
-      return("not a vaild puzzle or magic words");
+      // "not a vaild puzzle or magic words"
+      return Challenge.SOLVE_ERROR;
     }
-    String result = puzzle.solve(magicWords);
-    if (!puzzle.isActive()) {
+
+    Integer result = puzzle.solve(magicWords);
+
+    if (result == Challenge.SOLVE_SUCCESS && !puzzle.isActive()) {
       this.score += puzzle.getValue();
-      this.currentRoom.setRoomToPassable();// set room to passable for all direction
+      // set room to passable for all direction
       // once the puzzle or monster being solved
+      this.currentRoom.setRoomToPassable();
     }
+
     return result;
   }
 
