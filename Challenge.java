@@ -3,6 +3,16 @@
 
 
 public abstract class Challenge {
+  // common code represents the status of the operation
+  public static final int SOLVE_SUCCESS = 1;
+  // The attempt was valid but incorrect (e.g. wrong item used)
+  // The player made a valid attempt, but the solution did not match.
+  public static final int SOLVE_FAIL = -1;
+  // Wrong input type (e.g. item vs text)
+  public static final int SOLVE_WRONG_TYPE = 0;
+  // An invalid or unexpected condition occurred, such as a null puzzle or item.
+  public static final int SOLVE_ERROR = -2;
+
   // Common attributes for Puzzle and Monster
   protected String name;
   protected boolean active;
@@ -14,6 +24,7 @@ public abstract class Challenge {
   protected String effects;
   protected String target;
   protected String picture;
+
 
   // Getters
   public String getName() {
@@ -97,17 +108,7 @@ public abstract class Challenge {
     this.picture = picture;
   }
 
-  public String solve(Item item){
-    // if solution is a text instead of a item ,then return
-    // check if solution equal to item name,if solution is a item
-    // empty implementation, to be overridden in Puzzle and Monster
-    return "";
-  }
+  public abstract Integer solve(Item item)
 
-  public String solve(String magicWord){
-    // if solution is an item instead of a string
-    // check if solution equal to magic word
-    // empty implementation, to be overridden in Puzzle and Monster
-    return "";
-  }
+  public abstract Integer solve(String magicWord)
 }
