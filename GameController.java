@@ -129,8 +129,8 @@ public class GameController {
       Item item = it.next();
       if (item.getName().equalsIgnoreCase(itemName)) {
         it.remove();
-        int result = player.pickUpItem(item);
-        if (result == 0) {
+        boolean result = player.pickUpItem(item);
+        if (result) {
           return itemName + " added to your inventory.";
         } else {
           return "Weight exceeds capacity, cannot pick up " + itemName + ".";
