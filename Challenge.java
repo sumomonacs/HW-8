@@ -108,7 +108,7 @@ public abstract class Challenge {
     this.picture = picture;
   }
 
-  public abstract Integer solve(Item item)
+  public abstract Integer solve(Item item);
 
-  public abstract Integer solve(String magicWord)
+  public abstract Integer solve(String magicWord);
 }

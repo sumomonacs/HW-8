@@ -47,33 +47,38 @@ public class Monster extends Challenge {
   }
 
   @Override
-  public String solve(Item item) {
+  public Integer solve(Item item) {
     if (solution.startsWith("'") && solution.endsWith("'")) {
-      return ("solution is a text, not an item");
+      // solution is a text, not an item"
+      return SOLVE_WRONG_TYPE;
       // if solution is a text instead of a item ,then return
     } else if (solution.equalsIgnoreCase(item.getName())) {
-
       //check if solution equal to item name,if solution is a item
       this.active = false;
-      return ("Monster solved using the correct item!");
+      // "Monster solved using the correct item!";
+      return SOLVE_SUCCESS;
     } else {
-      return ("The item does not match the Monster's solution.");
+      // "The item does not match the Monster's solution.";
+      return SOLVE_FAIL;
     }
   }
 
 
   @Override
-  public String solve(String magicWord) {
+  public Integer solve(String magicWord) {
     if (!(solution.startsWith("'") || solution.endsWith("'"))) {
-      return ("solution is a item not a text");
+      // return ("solution is a item not a text");
+      return SOLVE_WRONG_TYPE;
 
       // if solution is a item instead of a string
     } else if (solution.equalsIgnoreCase(magicWord)) {
       //check if solution equal to magic word
       this.active = false;
-      return ("Monster solved using the correct magic word!");
+      // "Monster solved using the correct magic word!"
+      return SOLVE_SUCCESS;
     } else {
-      return ("The magicword does not match the Monster's solution.");
+      // "The magicword does not match the Monster's solution."
+      return SOLVE_FAIL;
     }
   }
 

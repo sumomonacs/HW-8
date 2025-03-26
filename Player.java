@@ -193,49 +193,53 @@ public class Player {
    * Fight with the monster using item.
    * @param item used to fight the monster
    * @param monster monster player facing right now
-   * @return message shows that whether it works for the monster
+   * @return integer code shows that whether it works for the monster
    */
-  public String solveMonster(Item item, Monster monster) {
+  public Integer solveMonster(Item item, Monster monster) {
     if (monster == null || item == null) {
-      return("not a vaild puzzle or item");
+      // return("not a vaild puzzle or item"
+      return Challenge.SOLVE_ERROR;
     }
-    if(item.getUses_remaining() >= 1){
-      String result = monster.solve(item);
-      if (!monster.isActive()) {
-        this.score += monster.getValue();
-        item.setUses_remaining(item.getUses_remaining() - 1);
-        //set use_remaining -=1
-        this.currentRoom.setRoomToPassable();// set room to passable for all direction
-        // once the puzzle or monster being solved
 
-        if(item.getUses_remaining() < 1){
-          currentRoom.getItem().remove(item);
-          // if getUsesRemaining <1)
-          // remove item
-        }
+    int result = monster.solve(item);
+
+    if (result == Challenge.SOLVE_SUCCESS && !monster.isActive()) {
+      this.score += monster.getValue();
+      item.setUses_remaining(item.getUses_remaining() - 1);
+      // set room to passable for all direction
+      // once the puzzle or monster being solved
+      this.currentRoom.setRoomToPassable();
+
+      // if getUsesRemaining <1, remove item
+      if (item.getUses_remaining() < 1) {
+        currentRoom.getItem().remove(item);
       }
-      return result;
-    } else {
-      return("item are out of use,no chance to use it");
     }
+
+    return result;
   }
 
   /**
    * Fight with the monster using magic words.
    * @param magicWords used to fight the monster
    * @param monster monster player facing right now
-   * @return message shows that whether it works for the monster
+   * @return integer code shows that whether it works for the monster
    */
-  public String solveMonster(String magicWords, Monster monster) {
+  public Integer solveMonster(String magicWords, Monster monster) {
     if (monster == null || magicWords == null || magicWords.equals("")) {
-      return("not a vaild puzzle or magic words");
+      // "not a vaild puzzle or magic words"
+      return Challenge.SOLVE_ERROR;
     }
-    String result = monster.solve(magicWords);
-    if (!monster.isActive()) {
+
+    int result = monster.solve(magicWords);
+
+    if (result == Challenge.SOLVE_SUCCESS && !monster.isActive()) {
       this.score += monster.getValue();
-      this.currentRoom.setRoomToPassable();// set room to passable for all direction
+      // set room to passable for all direction
       // once the puzzle or monster being solved
+      this.currentRoom.setRoomToPassable();
     }
+
     return result;
   }
 
