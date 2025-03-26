@@ -247,33 +247,37 @@ public class Player {
    * Move method.
    * @param Direction direction player wants to move
    * @param map map
-   * @return message shows that whether the move is accepted
+   * @return integer status code shows that whether the move is accepted
+   *         1 : move successfully
+   *         0: direction permanently blocked
+   *        -1: blocked by puzzle or monster
+   *        -2: invalid direction input
    */
-  public String move(String Direction, Map map) {
+  public Integer move(String Direction, Map map) {
     if (!(Direction.equals("N") || Direction.equals("E") || Direction.equals("S") || Direction.equals("W"))) {
-      return ("Input must be N, E, S, or W");
+      // "Input must be N, E, S, or W";
+      return -2;
     }
 
     int nextRoomNumber = -1;
-    String blockedMessage = "";
 
     // using switch case to try to catach direction
     switch (Direction) {
       case "N":
         nextRoomNumber = this.currentRoom.getN();
-        blockedMessage = "North is being permantly blocked ";
+        // blockedMessage = "North is being permantly blocked ";
         break;
       case "E":
         nextRoomNumber = this.currentRoom.getE();
-        blockedMessage = "East is being permantly blocked ";
+        // blockedMessage = "East is being permantly blocked ";
         break;
       case "S":
         nextRoomNumber = this.currentRoom.getS();
-        blockedMessage = "South is being permantly blocked ";
+        // blockedMessage = "South is being permantly blocked ";
         break;
       case "W":
         nextRoomNumber = this.currentRoom.getW();
-        blockedMessage = "West is being permantly blocked ";
+        // blockedMessage = "West is being permantly blocked ";
         break;
     }
 
@@ -284,18 +288,19 @@ public class Player {
         Room room = map.getRooms().get(i);
         if (nextRoomNumber == room.getRoom_number()) {
           this.currentRoom = room;
-          return ("move successfully");
+          //"move successfully"
+          return 1; 
           // if map do have this room , then player move to this Room
         }
       }
+      // Room number valid, but no room matched (unexpected error)
+      return -1;
     } else if (nextRoomNumber == 0) {
       // if nextRoomNumber ==0, it is permantly blocked
-      return (blockedMessage);
+      return 0;
     } else {
       // if it is negative, then there is puzzle or monster currently blocking the access
-      return ("there is a puzzle or monster currently blocking access to the room in that direction");
+      return -1;
     }
-    return ("there is a puzzle or monster currently blocking access to the room in that direction");
   }
-
 }
