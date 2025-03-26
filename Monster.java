@@ -36,13 +36,14 @@ public class Monster extends Challenge {
 
   /**
    * Attack the player damaging the health of the player
-   *
    * @param player current player
+   * @return boolean - whether attack successfully
    */
-  public void attackPlayer(Player player) {
+  public boolean attackPlayer(Player player) {
     int playerHealth = player.getHealth();
     // Attack the player and affects the health of the player
-    player.setHealth(playerHealth - this.damage);
+    // whether the player's health is out of range < 0
+    return player.setHealth(playerHealth - this.damage);
   }
 
   @Override
