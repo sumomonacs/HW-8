@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
-// game data package eveything except
+// game data package everything except
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameData {
     public String name;

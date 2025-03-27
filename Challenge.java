@@ -1,7 +1,4 @@
 
-
-
-
 public abstract class Challenge {
   // common code represents the status of the operation
   public static final int SOLVE_SUCCESS = 1;
