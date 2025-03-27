@@ -155,7 +155,50 @@ public class GameController {
     }
     return "You don't have item '" + itemName + "' in your inventory.";
   }
-  // use item and anwser question to solve monster and puzzle-- David Liu,
+
+  // useItem and answerQuestion boolean methods to solve monster and puzzle -- David Liu.
+
+  public boolean useItem(String itemName) {
+    // Check for monster present in current room.
+    Monster monster = currentRoom.getMonster();
+    // If no monster, then return false (no monster to use item on).
+    if (monster == null) {
+      return false;
+    }
+    // Check that the player has the item in their inventory.
+    if (!player.hasItem(itemName)) {
+      return false;
+    }
+    // Solve the monster challenge using the item.
+    int result = monster.solve(itemName);
+    if (result == Challenge.SOLVE_SUCCESS) {
+      // If useItem was successful, the monster goes to sleep and is removed from the room.
+      currentRoom.setMonster(null);
+      // Remove the used item from inventory after use.
+      player.removeItem(itemName);
+      return true;
+    }
+    // If the wrong item was used, the monster is alive.
+    return false;
+  }
+
+  public boolean answerPuzzle(String answer) {
+    // Check for a puzzle in the current room.
+    Puzzle puzzle = currentRoom.getPuzzle();
+    // No puzzle in this room.
+    if (puzzle == null) {
+      return false;
+    }
+    // Solve the puzzle with the answer.
+    int result = puzzle.solve(answer);
+    if (result == Challenge.SOLVE_SUCCESS) {
+      // If the answer is correct, clear the puzzle from the room.
+      currentRoom.setPuzzle(null);
+      return true;
+    }
+    // Otherwise, the puzzle remains unsolved.
+    return false;
+  }
 
   // save and load game -- Chen
 
